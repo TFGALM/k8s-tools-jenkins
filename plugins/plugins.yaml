@@ -1,0 +1,30 @@
+plugins:
+  # Quizás no lo necesitamos, però seguramente para recibir webhooks de gitlab hace falta
+  #- artifactId: gitlab-plugin
+  # Quzás no lo necesitamos, pero seguramente para la shared libary hace falta
+  #- artifactId: gitlab-branch-source
+  # Para ver en jenkis cada stage de pipeline y su duracion
+  - artifactId: pipeline-stage-view
+  # Para poder leer un yaml
+  - artifactId: pipeline-utility-steps
+  # Para ejecutar pipelines en contenedores
+  - artifactId: kubernetes
+  # Autenticacion con keycloak
+  - artifactId: oic-auth
+    source: 
+      version: 4.269.va_7526f34f306
+      #version: 4.257.v5360e8489e8b_
+  # Para definir roles a los usuarios
+  - artifactId: role-strategy
+  # Para poder hacer pipelines como codigo y tener un shared library
+  - artifactId: workflow-aggregator
+  # Quizás no lo neesitamos Para que jenkins pueda hacer git
+  - artifactId: git
+  # Experimentar, autocargar config
+  - artifactId: configuration-as-code
+  # Gitea plugin
+  - artifactId: gitea
+  #- artifactId: github
+  # Para configurar variables de entorno desde un webhook recibido
+  - artifactId: generic-webhook-trigger
+

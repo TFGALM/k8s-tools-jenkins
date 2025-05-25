@@ -1,0 +1,139 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1400.v7fd111b_ec82f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2198.v41dd8ef6dd56"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2198.v41dd8ef6dd56">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>50</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+      <abortPrevious>false</abortPrevious>
+    </org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>ORGANIZATION</name>
+          <description>Select Organization</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>aftermarket</string>
+              <string>buildingblocks</string>
+              <string>devops</string>
+              <string>devopsdeploy</string>
+              <string>devopstest</string>
+              <string>infrastructure</string>
+              <string>plataformasnavales</string>
+              <string>sid</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>HAS_CI</name>
+          <description>Select if the repository needs Continuos Integration</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>HAS_CD</name>
+          <description>Select if the repository needs Continuos Deployment</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>PROJECT_NAME</name>
+          <description>Insert a project name of the repository is not a building block</description>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>PRACTICE</name>
+          <description>Select a practice</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>ATM</string>
+              <string>Architecture</string>
+              <string>Artificial Intelligence</string>
+              <string>BI</string>
+              <string>CWE</string>
+              <string>Cloud/Egde</string>
+              <string>ComSec Sil Silodes</string>
+              <string>Confiable Autonomy</string>
+              <string>Continuous Delivery</string>
+              <string>Continuous Integration</string>
+              <string>Crypto Coms</string>
+              <string>CyberDef</string>
+              <string>CyberSec</string>
+              <string>DTWN &amp; GIS</string>
+              <string>Data Engineer</string>
+              <string>DevSecOps</string>
+              <string>Digital Platform</string>
+              <string>EDFs</string>
+              <string>Front</string>
+              <string>Geo &amp; NSpace</string>
+              <string>Middleware</string>
+              <string>Mobile</string>
+              <string>Ontology and Governance</string>
+              <string>Sim</string>
+              <string>Smart HMI</string>
+              <string>UxE</string>
+              <string>Virtual Reality</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>REPO_TYPE</name>
+          <description>Select a repository template for example: generic-project , argocd-deployment etc</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>other</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>REPO_NAME</name>
+          <description>Insert repository name</description>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>REPO_DESCRIPTION</name>
+          <description>Insert the repository description</description>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@3894.3896.vca_2c931e7935">
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.2">
+      <configVersion>2</configVersion>
+      <userRemoteConfigs>
+        <hudson.plugins.git.UserRemoteConfig>
+          <url>https://forgejo-prod.software.bl.platform/devops/bb-ci-repo-maker.git</url>
+          <credentialsId>jenkins-bot</credentialsId>
+        </hudson.plugins.git.UserRemoteConfig>
+      </userRemoteConfigs>
+      <branches>
+        <hudson.plugins.git.BranchSpec>
+          <name>main</name>
+        </hudson.plugins.git.BranchSpec>
+      </branches>
+      <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+      <submoduleCfg class="empty-list"/>
+      <extensions/>
+    </scm>
+    <scriptPath>Jenkinsfile</scriptPath>
+    <lightweight>true</lightweight>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
